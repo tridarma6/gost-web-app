@@ -1,5 +1,7 @@
 import axios from "axios"
 import { useState } from "react"
+import Swal from 'sweetalert2'
+
 
 const EncryptPage = () => {
   const [text, setText] = useState("")
@@ -15,6 +17,14 @@ const EncryptPage = () => {
   }
 
   const handleEncryptOnly = async () => {
+	if (key.length !== 32) {
+		return Swal.fire({
+			icon: 'error',
+			title: 'Key is not valid',
+			text: 'Key must be 32 character (256-bit)',
+		})
+	}
+
 	const start = performance.now()
 	try {
 		const res = await axios.post("http://localhost:5000/encrypt", { text, key })
@@ -24,8 +34,8 @@ const EncryptPage = () => {
 		setTime(durationSec)
 		setResult(res.data.result)
 		showModal(
-		"Enkripsi Berhasil",
-		`Waktu proses: ${durationMs} ms atau ${durationSec} s\n\nHasil:\n${res.data.result}`
+		"Encryption Success",
+		`Time process: ${durationMs} ms or ${durationSec} s\n\nResult:\n${res.data.result}`
 		)
 	} catch (err) {
 		const duration = performance.now() - start
@@ -33,9 +43,9 @@ const EncryptPage = () => {
 		const durationSec = (duration / 1000).toFixed(2)
 		setTime(durationSec)
 		showModal(
-		"Enkripsi Gagal",
-		`Waktu proses: ${durationMs} ms atau ${durationSec} s\n\nError: ${
-			err.response?.data?.error || "Terjadi kesalahan"
+		"Encryption Failed",
+		`Time process: ${durationMs} ms or ${durationSec} s\n\nError: ${
+			err.response?.data?.error || "Something went wrong"
 		}`
 		)
 	}
@@ -43,6 +53,13 @@ const EncryptPage = () => {
 
 
   const handleEncryptAndSendEmail = async () => {
+	if (key.length !== 32) {
+		return Swal.fire({
+			icon: 'error',
+			title: 'Key is not valid',
+			text: 'Key must be 32 character (256-bit)',
+		})
+	}
     const start = performance.now()
 	
     try {
@@ -59,19 +76,19 @@ const EncryptPage = () => {
 			setTime(durationSec)
       setResult(res.data.result)
       showModal(
-        "Enkripsi & Kirim Email Berhasil",
-        `Waktu proses: ${durationMs} ms atau ${durationSec} s\n\nHasil:\n${res.data.result}`
-      )
+		"Encryption Success",
+		`Time process: ${durationMs} ms or ${durationSec} s\n\nResult:\n${res.data.result}`
+		)
     } catch (err) {
       const duration = performance.now() - start
 			const durationMs = duration.toFixed(2)
 			const durationSec = (duration / 1000).toFixed(2)
 			setTime(durationSec)
       showModal(
-        "Gagal Mengirim Email",
-        `Waktu proses: ${durationMs} ms atau ${durationSec} s\n\nError: ${
-          err.response?.data?.error || "Terjadi kesalahan saat mengirim email"
-        }`
+        "Encryption Failed",
+		`Time process: ${durationMs} ms or ${durationSec} s\n\nError: ${
+			err.response?.data?.error || "Something went wrong"
+		}`
       )
     }
   }
@@ -103,6 +120,7 @@ const EncryptPage = () => {
 					value={text}
 					onChange={(e) => setText(e.target.value)}
 					className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray text-white"
+					required
 				/>
 
 				<input
@@ -111,6 +129,7 @@ const EncryptPage = () => {
 					value={key}
 					onChange={(e) => setKey(e.target.value)}
 					className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray  text-gray-700"
+					required
 				/>
 
 				<input

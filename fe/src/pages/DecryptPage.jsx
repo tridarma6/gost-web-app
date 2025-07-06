@@ -1,5 +1,7 @@
 import { useState } from "react"
 import axios from "axios"
+import Swal from 'sweetalert2'
+
 
 const DecryptPage = () => {
   const [cipher, setCipher] = useState("")
@@ -11,6 +13,13 @@ const DecryptPage = () => {
   const [time, setTime] = useState(0)
 
   const handleDecrypt = async () => {
+    if (key.length !== 32) {
+      return Swal.fire({
+        icon: 'error',
+        title: 'Key is not valid',
+        text: 'Key must be 32 character (256-bit)',
+      })
+    }
     const start = performance.now()
     try {
       const res = await axios.post("http://localhost:5000/decrypt", {
@@ -23,9 +32,9 @@ const DecryptPage = () => {
       const durationSec = (duration / 1000).toFixed(2)
       setTime(durationSec)
       setResult(res.data.result)
-      setModalTitle("✅ Dekripsi Berhasil")
+      setModalTitle("✅ Decryption Success")
       setModalMessage(
-        `Waktu proses: ${durationMs} ms atau ${durationSec} s\n\nHasil:\n${res.data.result}`
+        `Time process: ${durationMs} ms or ${durationSec} s\n\nResult:\n${res.data.result}`
       )
       setModalOpen(true)
     } catch (err) {
@@ -33,10 +42,10 @@ const DecryptPage = () => {
       const durationMs = duration.toFixed(2)
       const durationSec = (duration / 1000).toFixed(2)
       setTime(durationSec)
-      setModalTitle("❌ Dekripsi Gagal")
+      setModalTitle("❌ Decryption Failed")
       setModalMessage(
-        `Waktu proses: ${durationMs} ms atau ${durationSec} s\n\nError: ${
-          err.response?.data?.error || "Terjadi kesalahan saat dekripsi"
+        `Time process: ${durationMs} ms or ${durationSec} s\n\nError: ${
+          err.response?.data?.error || "Something went wrong"
         }`
       )
       setModalOpen(true)
