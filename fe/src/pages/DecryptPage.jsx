@@ -85,7 +85,7 @@ const DecryptPage = () => {
           style={{ textShadow: '0px 0px 20px #00BCF1' }}>
             Decryption
           </h1>
-          
+
           <div className="max-w-xl mx-auto space-y-4">
             <div>
               <p className="font-bold pb-1">Input Ciphertext</p>
@@ -106,12 +106,16 @@ const DecryptPage = () => {
                 onChange={(e) => setKey(e.target.value)}
               />
             </div>
+
             {result && (
-              <div className="bg-gray-800 p-3 rounded-xl border border-gray-100">
-                <strong>Plaintext:</strong>
-                <p className="mt-1 break-words text-[#00BCF1]">{result}</p>
-                <strong>Time:</strong>
-                <p className="mt-1 break-words text-[#00BCF1]">{time}</p>
+              <div>
+                <p className="font-bold pb-1">Output</p>
+                <div className="bg-gray-800 p-3 rounded-xl border border-gray-100">
+                  <strong>Plaintext:</strong>
+                  <p className="mt-1 break-words text-gray-400">{result}</p>
+                  <strong>Time:</strong>
+                  <p className="mt-1 break-words text-green-400">{time}s</p>
+                </div>
               </div>
             )}
             <button
