@@ -147,12 +147,12 @@ const EncryptPage = () => {
 		</div>
 
 		{/* Encryption */}
-		<div className="bg-black p-20 mx-80 rounded-3xl bg-opacity-60 ">
-			<div className="flex items-center justify-between mb-6">
-				<h1 className="text-2xl font-bold text-center flex-1"
+		<div className="bg-black p-20 mx-80 rounded-3xl bg-opacity-20 backdrop-blur-sm">
+			<div className="flex flex-col items-center justify-between mb-6 text-center">
+				<h1 className="text-2xl font-bold text-center"
 				style={{ textShadow: '0px 0px 20px #00BCF1' }}>
 					Encryption</h1>
-				<div className="w-20" /> {/* Spacer agar judul tetap center */}
+			
 			</div>
 
 			<div className="max-w-xl mx-auto space-y-4">
