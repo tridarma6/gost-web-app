@@ -80,7 +80,7 @@ const DecryptPage = () => {
               Back
             </a>
         </div>
-        <div className="bg-black p-20 mx-80 rounded-3xl bg-opacity-60 ">
+        <div className="bg-black p-20 mx-80 rounded-3xl bg-opacity-20 backdrop-blur-sm">
           <div className="flex items-center justify-between mb-6">
             <h1 className="text-2xl font-bold text-center flex-1"
             style={{ textShadow: '0px 0px 20px #00BCF1' }}>
@@ -88,33 +88,39 @@ const DecryptPage = () => {
             <div className="w-20" /> {/* Spacer agar judul tetap center */}
           </div>
           <div className="max-w-xl mx-auto space-y-4">
-            <textarea
-              className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray text-white"
-              placeholder="Input Chipertext"
-              rows={4}
-              value={cipher}
-              onChange={(e) => setCipher(e.target.value)}
-            />
-            <input
-              className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray text-white"
-              placeholder="Key (32 character)"
-              value={key}
-              onChange={(e) => setKey(e.target.value)}
-            />
+            <div>
+              <p className="font-bold pb-1">Input Ciphertext</p>
+              <textarea
+                className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray text-white"
+                placeholder="Input Chipertext"
+                rows={4}
+                value={cipher}
+                onChange={(e) => setCipher(e.target.value)}
+              />
+            </div>
+            <div>
+              <p className="font-bold pb-1">Input Key</p>
+              <input
+                className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray text-white"
+                placeholder="Key (32 character)"
+                value={key}
+                onChange={(e) => setKey(e.target.value)}
+              />
+            </div>
+            {result && (
+              <div className="bg-gray-800 p-3 rounded-xl border border-gray-100">
+                <strong>Plaintext:</strong>
+                <p className="mt-1 break-words text-[#00BCF1]">{result}</p>
+                <strong>Time:</strong>
+                <p className="mt-1 break-words text-[#00BCF1]">{time}</p>
+              </div>
+            )}
             <button
               onClick={handleDecrypt}
               className="bg-gradient-to-r from-[#0F1014] to-[#181B26] text-white shadow-[#00BCF1] shadow-md w-full p-3 rounded-xl font-semibold hover:text-[#00BCF1] hover:shadow-lg transition duration-300"
             >
               Decrypt
             </button>
-            {result && (
-              <div className="bg-gray-800 p-3 rounded border border-gray-600">
-                <strong>Plaintext:</strong>
-                <p className="mt-1 break-words text-yellow-300">{result}</p>
-                <strong>Time:</strong>
-                <p className="mt-1 break-words text-yellow-300">{time}</p>
-              </div>
-            )}
           </div>
         </div>
     </div>
