@@ -10,7 +10,6 @@ const EncryptPage = () => {
   const [senderEmail, setSenderEmail] = useState("")
   const [appPassword, setAppPassword] = useState("")
   const [result, setResult] = useState("")
-  const [modal, setModal] = useState({ show: false, title: "", message: "" })
 	const [time, setTime] = useState(0)
 
   const handleEncryptOnly = async () => {
@@ -147,12 +146,13 @@ const EncryptPage = () => {
 		</div>
 
 		{/* Encryption */}
-		<div className="bg-black p-10 mx-80 rounded-3xl bg-opacity-20 backdrop-blur-sm">
-			<h1 className="text-2xl font-bold text-center pb-10"
-			style={{ textShadow: '0px 0px 20px #00BCF1' }}>
-				Encryption
-			</h1>
-
+		<div className="bg-black p-20 mx-80 rounded-3xl bg-opacity-20 backdrop-blur-sm">
+			<div className="flex flex-col items-center justify-between mb-6 text-center">
+				<h1 className="text-2xl font-bold text-center"
+				style={{ textShadow: '0px 0px 20px #00BCF1' }}>
+					Encryption</h1>
+			
+			</div>
 
 			<div className="max-w-xl mx-auto space-y-4">
 				<div>
@@ -221,11 +221,11 @@ const EncryptPage = () => {
 					</div>
 				)}
 
-				<div className="flex gap-4 mb-4 items-center w-1/2">
-					<button onClick={handleEncryptOnly} className="bg-gradient-to-r from-[#0F1014] to-[#181B26] text-white shadow-[#00BCF1] shadow-md px-4 py-2 rounded-xl hover:text-[#00BCF1] hover:shadow-lg transition duration-300">
+				<div className="flex gap-4 mb-4 items-center w-full">
+					<button onClick={handleEncryptOnly} className="bg-gradient-to-r from-[#0F1014] to-[#181B26] text-white shadow-[#00BCF1] shadow-md px-4 py-2 rounded-xl hover:text-[#00BCF1] hover:shadow-lg transition duration-300 w-full">
 						Encrypt
 					</button>
-					<button onClick={handleEncryptAndSendEmail} className="bg-gradient-to-r from-[#0F1014] to-[#181B26] text-white shadow-[#00BCF1] shadow-md px-4 py-2 rounded-xl hover:text-[#00BCF1] hover:shadow-lg transition duration-300">
+					<button onClick={handleEncryptAndSendEmail} className="bg-gradient-to-r from-[#0F1014] to-[#181B26] text-white shadow-[#00BCF1] shadow-md px-4 py-2 rounded-xl hover:text-[#00BCF1] hover:shadow-lg transition duration-300 w-full">
 						Encrypt & Send Email
 					</button>
 				</div>
