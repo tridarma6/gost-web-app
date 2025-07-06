@@ -2,6 +2,7 @@ import axios from "axios"
 import { useState } from "react"
 import Swal from 'sweetalert2'
 import ArrowIconLeft from "../components/ArrowIconLeft"
+import { Eye, EyeOff } from "lucide-react"
 
 const EncryptPage = () => {
   const [text, setText] = useState("")
@@ -10,6 +11,7 @@ const EncryptPage = () => {
   const [senderEmail, setSenderEmail] = useState("")
   const [appPassword, setAppPassword] = useState("")
   const [result, setResult] = useState("")
+  const [showPassword, setShowPassword] = useState(false)
 	const [time, setTime] = useState(0)
 
   const handleEncryptOnly = async () => {
@@ -201,16 +203,23 @@ const EncryptPage = () => {
 					/>
 				</div>
 
-				<div>
+				<div className="relative">
 					<p className="font-bold pb-1">Input Email App Password</p>
 					<input
-						type="password"
+						type={showPassword ? "text" : "password"}
 						placeholder="App Password Gmail"
 						value={appPassword}
 						onChange={(e) => setAppPassword(e.target.value)}
-						className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray text-white"
+						className="w-full p-3 pr-12 bg-[#181B26] border border-white rounded placeholder:text-gray text-white"
 					/>
-				</div>
+					<button
+						type="button"
+						onClick={() => setShowPassword((prev) => !prev)}
+						className="absolute right-4 top-[42px] text-gray-400 hover:text-white"
+					>
+						{showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+					</button>
+					</div>
 
 				{result && (
 					<div className="bg-gray-800 p-3 rounded border border-white">
