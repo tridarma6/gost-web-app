@@ -1,5 +1,6 @@
 import { useState } from "react"
 import axios from "axios"
+import ArrowIconLeft from "../components/ArrowIconLeft"
 
 const DecryptPage = () => {
   const [cipher, setCipher] = useState("")
@@ -52,8 +53,9 @@ const DecryptPage = () => {
       backgroundRepeat: "no-repeat",
       }}>
       <div className="flex items-center justify-between mb-6">
+        <ArrowIconLeft/>
 				<a href="/" className="text-xl font-semibold text-white hover:underline">
-					← Back
+					Back
 				</a>
 				<h1 className="text-2xl font-bold text-center flex-1"
         style={{ textShadow: '0px 0px 20px #00BCF1' }}>

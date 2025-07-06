@@ -1,5 +1,6 @@
 import axios from "axios"
 import { useState } from "react"
+import ArrowIconLeft from "../components/ArrowIconLeft"
 
 const EncryptPage = () => {
   const [text, setText] = useState("")
@@ -86,6 +87,7 @@ const EncryptPage = () => {
     backgroundRepeat: "no-repeat",
     }}>
 			<div className="flex items-center justify-between mb-6">
+				<ArrowIconLeft/>
 				<a href="/" className="text-xl font-semibold text-white hover:underline">
 					Back
 				</a>
@@ -110,7 +112,7 @@ const EncryptPage = () => {
 					placeholder="Key (32 character)"
 					value={key}
 					onChange={(e) => setKey(e.target.value)}
-					className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray  text-gray-700"
+					className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray  text-white"
 				/>
 
 				<input
@@ -118,7 +120,7 @@ const EncryptPage = () => {
 					placeholder="Recipient Email"
 					value={recipientEmail}
 					onChange={(e) => setRecipientEmail(e.target.value)}
-					className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray text-gray-700"
+					className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray text-white"
 				/>
 
 				<input
@@ -126,7 +128,7 @@ const EncryptPage = () => {
 					placeholder="Sender's Email"
 					value={senderEmail}
 					onChange={(e) => setSenderEmail(e.target.value)}
-					className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray text-gray-700"
+					className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray text-white"
 				/>
 
 				<input
@@ -134,7 +136,7 @@ const EncryptPage = () => {
 					placeholder="App Password Gmail"
 					value={appPassword}
 					onChange={(e) => setAppPassword(e.target.value)}
-					className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray text-gray-700"
+					className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray text-white"
 				/>
 
 				<div className="flex gap-4 mb-4">

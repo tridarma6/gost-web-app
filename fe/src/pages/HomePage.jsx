@@ -30,13 +30,13 @@ const HomePage = () => {
           <div className="flex gap-4">
             <button
               onClick={() => navigate("/encrypt")}
-              className="bg-gradient-to-r from-[#0F1014] to-[#181B26] text-white shadow-[#00BCF1] shadow-md font-semibold px-6 py-3 rounded-xl transition-all duration-300"
+              className="bg-gradient-to-r from-[#0F1014] to-[#181B26] text-white shadow-[#00BCF1] font-semibold px-6 py-3 rounded-xl shadow-md hover:text-[#00BCF1] hover:drop-shadow-lg transition duration-300"
             >
               Encryption
             </button>
             <button
               onClick={() => navigate("/decrypt")}
-              className="bg-gradient-to-r from-[#0F1014] to-[#181B26] text-white shadow-[#00BCF1] font-semibold px-6 py-3 rounded-xl shadow-md transition-all duration-300"
+              className="bg-gradient-to-r from-[#0F1014] to-[#181B26] text-white shadow-[#00BCF1] font-semibold px-6 py-3 rounded-xl shadow-md hover:text-[#00BCF1] hover:drop-shadow-lg transition duration-300"
             >
               Decryption
             </button>
