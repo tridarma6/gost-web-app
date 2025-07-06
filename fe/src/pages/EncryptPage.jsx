@@ -1,0 +1,170 @@
+import axios from "axios"
+import { useState } from "react"
+
+const EncryptPage = () => {
+  const [text, setText] = useState("")
+  const [key, setKey] = useState("")
+  const [recipientEmail, setRecipientEmail] = useState("")
+  const [senderEmail, setSenderEmail] = useState("")
+  const [appPassword, setAppPassword] = useState("")
+  const [result, setResult] = useState("")
+  const [modal, setModal] = useState({ show: false, title: "", message: "" })
+	const [time, setTime] = useState(0)
+  const showModal = (title, message) => {
+    setModal({ show: true, title, message })
+  }
+
+  const handleEncryptOnly = async () => {
+	const start = performance.now()
+	try {
+		const res = await axios.post("http://localhost:5000/encrypt", { text, key })
+		const duration = performance.now() - start
+		const durationMs = duration.toFixed(2)
+		const durationSec = (duration / 1000).toFixed(2)
+		setTime(durationSec)
+		setResult(res.data.result)
+		showModal(
+		"Enkripsi Berhasil",
+		`Waktu proses: ${durationMs} ms atau ${durationSec} s\n\nHasil:\n${res.data.result}`
+		)
+	} catch (err) {
+		const duration = performance.now() - start
+		const durationMs = duration.toFixed(2)
+		const durationSec = (duration / 1000).toFixed(2)
+		setTime(durationSec)
+		showModal(
+		"Enkripsi Gagal",
+		`Waktu proses: ${durationMs} ms atau ${durationSec} s\n\nError: ${
+			err.response?.data?.error || "Terjadi kesalahan"
+		}`
+		)
+	}
+	}
+
+
+  const handleEncryptAndSendEmail = async () => {
+    const start = performance.now()
+	
+    try {
+      const res = await axios.post("http://localhost:5000/encrypt-email", {
+        text,
+        key,
+        to_email: recipientEmail,
+        sender_email: senderEmail,
+        app_password: appPassword,
+      })
+      const duration = performance.now() - start
+	  	const durationMs = duration.toFixed(2)
+			const durationSec = (duration / 1000).toFixed(2)
+			setTime(durationSec)
+      setResult(res.data.result)
+      showModal(
+        "Enkripsi & Kirim Email Berhasil",
+        `Waktu proses: ${durationMs} ms atau ${durationSec} s\n\nHasil:\n${res.data.result}`
+      )
+    } catch (err) {
+      const duration = performance.now() - start
+			const durationMs = duration.toFixed(2)
+			const durationSec = (duration / 1000).toFixed(2)
+			setTime(durationSec)
+      showModal(
+        "Gagal Mengirim Email",
+        `Waktu proses: ${durationMs} ms atau ${durationSec} s\n\nError: ${
+          err.response?.data?.error || "Terjadi kesalahan saat mengirim email"
+        }`
+      )
+    }
+  }
+
+
+  return (
+    <div className="min-h-screen bg-gradient-to-r from-[#0F1014] via-[#0F0A38] to-[#150E4A] text-white p-8">
+			<div className="flex items-center justify-between mb-6">
+				<a href="/" className="text-xl font-semibold text-blue-800 hover:underline">
+					← Back
+				</a>
+				<h1 className="text-2xl font-bold text-center flex-1">Encryption</h1>
+				<div className="w-20" /> {/* Spacer agar judul tetap center */}
+			</div>
+
+			<div className="max-w-xl mx-auto space-y-4">
+
+				<input
+					type="text"
+					placeholder="Plaintext"
+					value={text}
+					onChange={(e) => setText(e.target.value)}
+					className="w-full p-3 bg-gray-200 border border-gray-700 rounded placeholder:text-gray-700 text-gray-700"
+				/>
+
+				<input
+					type="text"
+					placeholder="Key (32 character)"
+					value={key}
+					onChange={(e) => setKey(e.target.value)}
+					className="w-full p-3 bg-gray-200 border border-gray-700 rounded placeholder:text-gray-700  text-gray-700"
+				/>
+
+				<input
+					type="email"
+					placeholder="Recipient Email"
+					value={recipientEmail}
+					onChange={(e) => setRecipientEmail(e.target.value)}
+					className="w-full p-3 bg-gray-200 border border-gray-700 rounded placeholder:text-gray-700 text-gray-700"
+				/>
+
+				<input
+					type="email"
+					placeholder="Sender's Email"
+					value={senderEmail}
+					onChange={(e) => setSenderEmail(e.target.value)}
+					className="w-full p-3 bg-gray-200 border border-gray-700 rounded placeholder:text-gray-700 text-gray-700"
+				/>
+
+				<input
+					type="password"
+					placeholder="App Password Gmail"
+					value={appPassword}
+					onChange={(e) => setAppPassword(e.target.value)}
+					className="w-full p-3 bg-gray-200 border border-gray-700 rounded placeholder:text-gray-700 text-gray-700"
+				/>
+
+				<div className="flex gap-4 mb-4">
+					<button onClick={handleEncryptOnly} className="bg-blue-800 hover:bg-blue-600 px-4 py-2 rounded">
+						Encrypt
+					</button>
+					<button onClick={handleEncryptAndSendEmail} className="bg-green-800 hover:bg-green-600 px-4 py-2 rounded">
+						Encrypt & Send Email
+					</button>
+				</div>
+
+				{result && (
+					<div className="bg-gray-800 p-3 rounded border border-gray-600">
+							<strong>Plaintext:</strong>
+							<p className="mt-1 break-words text-yellow-300">{result}</p>
+							<strong>Time:</strong>
+							<p className="mt-1 break-words text-yellow-300">{time}</p>
+						</div>
+				)}
+			</div>
+
+      {/* Modal */}
+      {modal.show && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white text-black p-6 rounded-xl max-w-md w-full">
+            <h2 className="text-xl font-bold mb-2">{modal.title}</h2>
+            <pre className="whitespace-pre-wrap text-sm">{modal.message}</pre>
+            <button
+              onClick={() => setModal({ ...modal, show: false })}
+              className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default EncryptPage
