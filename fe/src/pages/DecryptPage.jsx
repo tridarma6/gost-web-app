@@ -61,8 +61,8 @@ const DecryptPage = () => {
       backgroundRepeat: "no-repeat",
       }}>
       <div className="flex items-center justify-between mb-6">
+				<a href="/" className="flex text-xl font-semibold text-white hover:underline">
         <ArrowIconLeft/>
-				<a href="/" className="text-xl font-semibold text-white hover:underline">
 					Back
 				</a>
 				<h1 className="text-2xl font-bold text-center flex-1"
