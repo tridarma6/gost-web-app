@@ -152,7 +152,7 @@ const EncryptPage = () => {
 					placeholder="Key (32 character)"
 					value={key}
 					onChange={(e) => setKey(e.target.value)}
-					className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray  text-gray-700"
+					className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray  text-white"
 					required
 				/>
 
