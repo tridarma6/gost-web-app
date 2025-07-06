@@ -78,12 +78,20 @@ const EncryptPage = () => {
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-[#0F1014] via-[#0F0A38] to-[#150E4A] text-white p-8">
+    <div className="min-h-screen text-white p-8"
+	style={{ 
+    backgroundImage: "url('/bg-gost.png')",
+    backgroundSize: "Cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    }}>
 			<div className="flex items-center justify-between mb-6">
-				<a href="/" className="text-xl font-semibold text-blue-800 hover:underline">
-					← Back
+				<a href="/" className="text-xl font-semibold text-white hover:underline">
+					Back
 				</a>
-				<h1 className="text-2xl font-bold text-center flex-1">Encryption</h1>
+				<h1 className="text-2xl font-bold text-center flex-1"
+				style={{ textShadow: '0px 0px 20px #00BCF1' }}>
+					Encryption</h1>
 				<div className="w-20" /> {/* Spacer agar judul tetap center */}
 			</div>
 
@@ -94,7 +102,7 @@ const EncryptPage = () => {
 					placeholder="Plaintext"
 					value={text}
 					onChange={(e) => setText(e.target.value)}
-					className="w-full p-3 bg-gray-200 border border-gray-700 rounded placeholder:text-gray-700 text-gray-700"
+					className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray text-white"
 				/>
 
 				<input
@@ -102,7 +110,7 @@ const EncryptPage = () => {
 					placeholder="Key (32 character)"
 					value={key}
 					onChange={(e) => setKey(e.target.value)}
-					className="w-full p-3 bg-gray-200 border border-gray-700 rounded placeholder:text-gray-700  text-gray-700"
+					className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray  text-gray-700"
 				/>
 
 				<input
@@ -110,7 +118,7 @@ const EncryptPage = () => {
 					placeholder="Recipient Email"
 					value={recipientEmail}
 					onChange={(e) => setRecipientEmail(e.target.value)}
-					className="w-full p-3 bg-gray-200 border border-gray-700 rounded placeholder:text-gray-700 text-gray-700"
+					className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray text-gray-700"
 				/>
 
 				<input
@@ -118,7 +126,7 @@ const EncryptPage = () => {
 					placeholder="Sender's Email"
 					value={senderEmail}
 					onChange={(e) => setSenderEmail(e.target.value)}
-					className="w-full p-3 bg-gray-200 border border-gray-700 rounded placeholder:text-gray-700 text-gray-700"
+					className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray text-gray-700"
 				/>
 
 				<input
@@ -126,14 +134,14 @@ const EncryptPage = () => {
 					placeholder="App Password Gmail"
 					value={appPassword}
 					onChange={(e) => setAppPassword(e.target.value)}
-					className="w-full p-3 bg-gray-200 border border-gray-700 rounded placeholder:text-gray-700 text-gray-700"
+					className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray text-gray-700"
 				/>
 
 				<div className="flex gap-4 mb-4">
-					<button onClick={handleEncryptOnly} className="bg-blue-800 hover:bg-blue-600 px-4 py-2 rounded">
+					<button onClick={handleEncryptOnly} className="bg-gradient-to-r from-[#0F1014] to-[#181B26] text-white shadow-[#00BCF1] shadow-md px-4 py-2 rounded-xl">
 						Encrypt
 					</button>
-					<button onClick={handleEncryptAndSendEmail} className="bg-green-800 hover:bg-green-600 px-4 py-2 rounded">
+					<button onClick={handleEncryptAndSendEmail} className="bg-gradient-to-r from-[#0F1014] to-[#181B26] text-white shadow-[#00BCF1] shadow-md px-4 py-2 rounded-xl">
 						Encrypt & Send Email
 					</button>
 				</div>

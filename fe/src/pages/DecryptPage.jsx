@@ -44,31 +44,39 @@ const DecryptPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-[#0F1014] via-[#0F0A38] to-[#150E4A] text-white p-8">
+    <div className="min-h-screen bg-gradient-to-r from-[#0F1014] via-[#0F0A38] to-[#150E4A] text-white p-8"
+      style={{ 
+      backgroundImage: "url('/bg-gost.png')",
+      backgroundSize: "Cover",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+      }}>
       <div className="flex items-center justify-between mb-6">
-				<a href="/" className="text-xl font-semibold text-blue-800 hover:underline">
+				<a href="/" className="text-xl font-semibold text-white hover:underline">
 					← Back
 				</a>
-				<h1 className="text-2xl font-bold text-center flex-1">Decryption</h1>
+				<h1 className="text-2xl font-bold text-center flex-1"
+        style={{ textShadow: '0px 0px 20px #00BCF1' }}>
+          Decryption</h1>
 				<div className="w-20" /> {/* Spacer agar judul tetap center */}
 			</div>
       <div className="max-w-xl mx-auto space-y-4">
         <textarea
-          className="w-full p-3 bg-gray-200 border border-gray-700 rounded placeholder:text-gray-700 text-gray-700"
+          className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray text-white"
           placeholder="Input Chipertext"
           rows={4}
           value={cipher}
           onChange={(e) => setCipher(e.target.value)}
         />
         <input
-          className="w-full p-3 bg-gray-200 border border-gray-700 rounded placeholder:text-gray-700 text-gray-700"
+          className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray text-white"
           placeholder="Key (32 character)"
           value={key}
           onChange={(e) => setKey(e.target.value)}
         />
         <button
           onClick={handleDecrypt}
-          className="bg-blue-800 hover:bg-blue-700 w-full p-3 rounded font-semibold"
+          className="bg-gradient-to-r from-[#0F1014] to-[#181B26] text-white shadow-[#00BCF1] shadow-md w-full p-3 rounded font-semibold"
         >
           Decrypt
         </button>

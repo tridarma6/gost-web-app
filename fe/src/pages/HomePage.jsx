@@ -5,11 +5,19 @@ const HomePage = () => {
   const navigate = useNavigate()
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-[#0F1014] via-[#0F0A38] to-[#150E4A] text-white flex items-center justify-center px-6">
+    <div className="min-h-screen text-white flex items-center justify-center px-6"
+    style={{ 
+      backgroundImage: "url('/bg-gost.png')",
+      backgroundSize: "Cover",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+    }}>
       <div className="max-w-6xl w-full grid md:grid-cols-2 gap-10 items-center">
         {/* LEFT: Description */}
         <div>
-          <h1 className="text-4xl font-bold mb-4">GOST Email Encryption System</h1>
+          <h1 className="text-4xl font-bold mb-4 text-shadow-cyan"
+          style={{ textShadow: '0px 0px 20px #00BCF1' }}>
+            GOST Email Encryption System</h1>
           <p className="text-lg text-gray-300">
             A modern encryption platform that allows you to secure messages using the powerful and trusted GOST algorithm (a Russian encryption standard).
             With this system, you can instantly encrypt messages and send the results directly to the recipient's email to ensure data confidentiality is maintained.
@@ -22,13 +30,13 @@ const HomePage = () => {
           <div className="flex gap-4">
             <button
               onClick={() => navigate("/encrypt")}
-              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-xl shadow-md transition-all duration-300"
+              className="bg-gradient-to-r from-[#0F1014] to-[#181B26] text-white shadow-[#00BCF1] shadow-md font-semibold px-6 py-3 rounded-xl transition-all duration-300"
             >
               Encryption
             </button>
             <button
               onClick={() => navigate("/decrypt")}
-              className="bg-gray-700 hover:bg-gray-800 text-white font-semibold px-6 py-3 rounded-xl shadow-md transition-all duration-300"
+              className="bg-gradient-to-r from-[#0F1014] to-[#181B26] text-white shadow-[#00BCF1] font-semibold px-6 py-3 rounded-xl shadow-md transition-all duration-300"
             >
               Decryption
             </button>
