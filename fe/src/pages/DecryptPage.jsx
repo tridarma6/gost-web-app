@@ -81,12 +81,11 @@ const DecryptPage = () => {
             </a>
         </div>
         <div className="bg-black p-20 mx-80 rounded-3xl bg-opacity-20 backdrop-blur-sm">
-          <div className="flex items-center justify-between mb-6">
-            <h1 className="text-2xl font-bold text-center flex-1"
-            style={{ textShadow: '0px 0px 20px #00BCF1' }}>
-              Decryption</h1>
-            <div className="w-20" /> {/* Spacer agar judul tetap center */}
-          </div>
+          <h1 className="text-2xl font-bold text-center pb-10"
+          style={{ textShadow: '0px 0px 20px #00BCF1' }}>
+            Decryption
+          </h1>
+          
           <div className="max-w-xl mx-auto space-y-4">
             <div>
               <p className="font-bold pb-1">Input Ciphertext</p>
