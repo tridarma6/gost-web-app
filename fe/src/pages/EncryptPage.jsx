@@ -12,9 +12,6 @@ const EncryptPage = () => {
   const [result, setResult] = useState("")
   const [modal, setModal] = useState({ show: false, title: "", message: "" })
 	const [time, setTime] = useState(0)
-  const showModal = (title, message) => {
-    setModal({ show: true, title, message })
-  }
 
   const handleEncryptOnly = async () => {
 	if (key.length !== 32) {
@@ -38,7 +35,6 @@ const EncryptPage = () => {
 	try {
 		const res = await axios.post("http://localhost:5000/encrypt", { text, key })
 		const duration = performance.now() - start
-		const durationMs = duration.toFixed(2)
 		const durationSec = (duration / 1000).toFixed(2)
 		setTime(durationSec)
 		setResult(res.data.result)
@@ -55,7 +51,6 @@ const EncryptPage = () => {
 			})
 	} catch (err) {
 		const duration = performance.now() - start
-		const durationMs = duration.toFixed(2)
 		const durationSec = (duration / 1000).toFixed(2)
 		setTime(durationSec)
 		Swal.fire({
@@ -101,7 +96,6 @@ const EncryptPage = () => {
         app_password: appPassword,
       })
       const duration = performance.now() - start
-	  	const durationMs = duration.toFixed(2)
 		const durationSec = (duration / 1000).toFixed(2)
 		setTime(durationSec)
       setResult(res.data.result)
@@ -119,7 +113,6 @@ const EncryptPage = () => {
 
     } catch (err) {
       const duration = performance.now() - start
-			const durationMs = duration.toFixed(2)
 			const durationSec = (duration / 1000).toFixed(2)
 			setTime(durationSec)
       Swal.fire({
