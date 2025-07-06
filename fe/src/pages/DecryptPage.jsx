@@ -8,8 +8,6 @@ const DecryptPage = () => {
   const [key, setKey] = useState("")
   const [result, setResult] = useState("")
   const [modalOpen, setModalOpen] = useState(false)
-  const [modalTitle, setModalTitle] = useState("")
-  const [modalMessage, setModalMessage] = useState("")
   const [time, setTime] = useState(0)
 
   const handleDecrypt = async () => {
@@ -37,27 +35,35 @@ const DecryptPage = () => {
       })
 
       const duration = performance.now() - start
-      const durationMs = duration.toFixed(2)
       const durationSec = (duration / 1000).toFixed(2)
       setTime(durationSec)
       setResult(res.data.result)
-      setModalTitle("✅ Decryption Success")
-      setModalMessage(
-        `Time process: ${durationMs} ms or ${durationSec} s\n\nResult:\n${res.data.result}`
-      )
-      setModalOpen(true)
+      Swal.fire({
+        title: 'Encryption Success',
+        html: `<p class="text-green-400 font-semibold">Time process: ${durationSec} s</p>`,
+        icon: 'success',
+        customClass: {
+          popup: 'bg-slate-900 text-white rounded-xl shadow-xl p-6',
+          title: 'text-xl font-bold',
+          confirmButton: 'bg-emerald-500 hover:bg-emerald-600 px-4 py-2 rounded-md text-white',
+        },
+        buttonsStyling: false,
+        })
     } catch (err) {
       const duration = performance.now() - start
-      const durationMs = duration.toFixed(2)
       const durationSec = (duration / 1000).toFixed(2)
       setTime(durationSec)
-      setModalTitle("❌ Decryption Failed")
-      setModalMessage(
-        `Time process: ${durationMs} ms or ${durationSec} s\n\nError: ${
-          err.response?.data?.error || "Something went wrong"
-        }`
-      )
-      setModalOpen(true)
+      Swal.fire({
+        title: 'Encryption Failed',
+        html: `<p class="text-green-400 font-semibold">Time process: ${durationSec} s</p>`,
+        icon: 'failed',
+        customClass: {
+          popup: 'bg-slate-900 text-white rounded-xl shadow-xl p-6',
+          title: 'text-xl font-bold',
+          confirmButton: 'bg-emerald-500 hover:bg-emerald-600 px-4 py-2 rounded-md text-white',
+        },
+        buttonsStyling: false,
+        })
     }
   }
 
@@ -108,24 +114,6 @@ const DecryptPage = () => {
           </div>
         )}
       </div>
-
-      {/* Modal */}
-      {modalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
-          <div className="bg-white text-black p-6 rounded-xl shadow-lg w-11/12 max-w-md">
-            <h3 className="text-xl font-bold mb-4">{modalTitle}</h3>
-            <pre className="whitespace-pre-wrap mb-6 text-sm text-gray-800">
-              {modalMessage}
-            </pre>
-            <button
-              onClick={() => setModalOpen(false)}
-              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   )
 }
