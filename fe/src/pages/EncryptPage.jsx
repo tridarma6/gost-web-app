@@ -10,7 +10,6 @@ const EncryptPage = () => {
   const [senderEmail, setSenderEmail] = useState("")
   const [appPassword, setAppPassword] = useState("")
   const [result, setResult] = useState("")
-  const [modal, setModal] = useState({ show: false, title: "", message: "" })
 	const [time, setTime] = useState(0)
 
   const handleEncryptOnly = async () => {
@@ -156,49 +155,73 @@ const EncryptPage = () => {
 			</div>
 
 			<div className="max-w-xl mx-auto space-y-4">
-				<input
-					type="text"
-					placeholder="Plaintext"
-					value={text}
-					onChange={(e) => setText(e.target.value)}
-					className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray text-white"
-					required
-				/>
+				<div>
+					<p className="font-bold pb-1">Input Plaintext</p>
+					<input
+						type="text"
+						placeholder="Plaintext"
+						value={text}
+						onChange={(e) => setText(e.target.value)}
+						className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray text-white"
+						required
+					/>
+				</div>
 
-				<input
-					type="text"
-					placeholder="Key (32 character)"
-					value={key}
-					onChange={(e) => setKey(e.target.value)}
-					className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray  text-white"
-					required
-				/>
+				<div>
+					<p className="font-bold pb-1">Input Key</p>
+					<input
+						type="text"
+						placeholder="Key (32 character)"
+						value={key}
+						onChange={(e) => setKey(e.target.value)}
+						className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray  text-white"
+						required
+					/>
+				</div>
 
-				<input
-					type="email"
-					placeholder="Recipient Email"
-					value={recipientEmail}
-					onChange={(e) => setRecipientEmail(e.target.value)}
-					className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray text-white"
-				/>
+				<div>
+					<p className="font-bold pb-1">Input Recipient Email</p>
+					<input
+						type="email"
+						placeholder="Recipient Email"
+						value={recipientEmail}
+						onChange={(e) => setRecipientEmail(e.target.value)}
+						className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray text-white"
+					/>
+				</div>
 
-				<input
-					type="email"
-					placeholder="Sender's Email"
-					value={senderEmail}
-					onChange={(e) => setSenderEmail(e.target.value)}
-					className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray text-white"
-				/>
+				<div>
+					<p className="font-bold pb-1">Input Email</p>
+					<input
+						type="email"
+						placeholder="Sender's Email"
+						value={senderEmail}
+						onChange={(e) => setSenderEmail(e.target.value)}
+						className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray text-white"
+					/>
+				</div>
 
-				<input
-					type="password"
-					placeholder="App Password Gmail"
-					value={appPassword}
-					onChange={(e) => setAppPassword(e.target.value)}
-					className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray text-white"
-				/>
+				<div>
+					<p className="font-bold pb-1">Input Email App Password</p>
+					<input
+						type="password"
+						placeholder="App Password Gmail"
+						value={appPassword}
+						onChange={(e) => setAppPassword(e.target.value)}
+						className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray text-white"
+					/>
+				</div>
 
-				<div className="flex gap-4 mb-4 ">
+				{result && (
+					<div className="bg-gray-800 p-3 rounded border border-white">
+						<strong>Ciphertext:</strong>
+						<p className="mt-1 break-words text-[#00BCF1]">{result}</p>
+						<strong>Time:</strong>
+						<p className="mt-1 break-words text-[#00BCF1]">{time}s</p>
+					</div>
+				)}
+
+				<div className="flex gap-4 mb-4 items-center w-1/2">
 					<button onClick={handleEncryptOnly} className="bg-gradient-to-r from-[#0F1014] to-[#181B26] text-white shadow-[#00BCF1] shadow-md px-4 py-2 rounded-xl hover:text-[#00BCF1] hover:shadow-lg transition duration-300">
 						Encrypt
 					</button>
@@ -206,33 +229,8 @@ const EncryptPage = () => {
 						Encrypt & Send Email
 					</button>
 				</div>
-
-				{result && (
-					<div className="bg-gray-800 p-3 rounded border border-gray-600">
-							<strong>Plaintext:</strong>
-							<p className="mt-1 break-words text-yellow-300">{result}</p>
-							<strong>Time:</strong>
-							<p className="mt-1 break-words text-yellow-300">{time}</p>
-						</div>
-				)}
 			</div>
 		</div>
-
-      {/* Modal */}
-      {modal.show && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white text-black p-6 rounded-xl max-w-md w-full">
-            <h2 className="text-xl font-bold mb-2">{modal.title}</h2>
-            <pre className="whitespace-pre-wrap text-sm">{modal.message}</pre>
-            <button
-              onClick={() => setModal({ ...modal, show: false })}
-              className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   )
 }
