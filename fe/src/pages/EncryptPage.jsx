@@ -158,10 +158,10 @@ const EncryptPage = () => {
 				/>
 
 				<div className="flex gap-4 mb-4">
-					<button onClick={handleEncryptOnly} className="bg-gradient-to-r from-[#0F1014] to-[#181B26] text-white shadow-[#00BCF1] shadow-md px-4 py-2 rounded-xl">
+					<button onClick={handleEncryptOnly} className="bg-gradient-to-r from-[#0F1014] to-[#181B26] text-white shadow-[#00BCF1] shadow-md px-4 py-2 rounded-xl hover:text-[#00BCF1] hover:shadow-lg transition duration-300">
 						Encrypt
 					</button>
-					<button onClick={handleEncryptAndSendEmail} className="bg-gradient-to-r from-[#0F1014] to-[#181B26] text-white shadow-[#00BCF1] shadow-md px-4 py-2 rounded-xl">
+					<button onClick={handleEncryptAndSendEmail} className="bg-gradient-to-r from-[#0F1014] to-[#181B26] text-white shadow-[#00BCF1] shadow-md px-4 py-2 rounded-xl hover:text-[#00BCF1] hover:shadow-lg transition duration-300">
 						Encrypt & Send Email
 					</button>
 				</div>

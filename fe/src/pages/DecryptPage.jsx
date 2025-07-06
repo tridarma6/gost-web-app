@@ -86,7 +86,7 @@ const DecryptPage = () => {
         />
         <button
           onClick={handleDecrypt}
-          className="bg-gradient-to-r from-[#0F1014] to-[#181B26] text-white shadow-[#00BCF1] shadow-md w-full p-3 rounded font-semibold"
+          className="bg-gradient-to-r from-[#0F1014] to-[#181B26] text-white shadow-[#00BCF1] shadow-md w-full p-3 rounded-xl font-semibold hover:text-[#00BCF1] hover:shadow-lg transition duration-300"
         >
           Decrypt
         </button>
