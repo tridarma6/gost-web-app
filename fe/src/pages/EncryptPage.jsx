@@ -120,11 +120,17 @@ const EncryptPage = () => {
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     }}>
-			<div className="flex items-center justify-between mb-6">
-				<a href="/" className="flex text-xl font-semibold text-white hover:underline">
+		{/* Back Button */}
+		<div>
+			<a href="/" className="flex text-xl font-semibold text-white hover:underline">
 					<ArrowIconLeft/>
 					Back
-				</a>
+			</a>
+		</div>
+
+		{/* Encryption */}
+		<div className="bg-black p-20 mx-80 rounded-3xl bg-opacity-60 ">
+			<div className="flex items-center justify-between mb-6">
 				<h1 className="text-2xl font-bold text-center flex-1"
 				style={{ textShadow: '0px 0px 20px #00BCF1' }}>
 					Encryption</h1>
@@ -132,7 +138,6 @@ const EncryptPage = () => {
 			</div>
 
 			<div className="max-w-xl mx-auto space-y-4">
-
 				<input
 					type="text"
 					placeholder="Plaintext"
@@ -175,7 +180,7 @@ const EncryptPage = () => {
 					className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray text-white"
 				/>
 
-				<div className="flex gap-4 mb-4">
+				<div className="flex gap-4 mb-4 ">
 					<button onClick={handleEncryptOnly} className="bg-gradient-to-r from-[#0F1014] to-[#181B26] text-white shadow-[#00BCF1] shadow-md px-4 py-2 rounded-xl hover:text-[#00BCF1] hover:shadow-lg transition duration-300">
 						Encrypt
 					</button>
@@ -193,6 +198,7 @@ const EncryptPage = () => {
 						</div>
 				)}
 			</div>
+		</div>
 
       {/* Modal */}
       {modal.show && (
