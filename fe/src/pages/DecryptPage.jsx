@@ -14,12 +14,21 @@ const DecryptPage = () => {
 
   const handleDecrypt = async () => {
     if (key.length !== 32) {
-      return Swal.fire({
-        icon: 'error',
-        title: 'Key is not valid',
-        text: 'Key must be 32 character (256-bit)',
-      })
-    }
+        return Swal.fire({
+          title: 'Oops!',
+          text: 'The Key is not valid!',
+          icon: 'error',
+          customClass: {
+            icon: 'text-red-900',
+            popup: 'rounded-xl bg-gray-800 text-white',
+            confirmButton: 'bg-red-700 hover:bg-red-600 text-white px-6 py-2 rounded-lg shadow',
+            title: 'text-2xl font-bold',
+            htmlContainer: 'text-sm text-gray-300',
+          },
+          buttonsStyling: false, // agar customClass digunakan
+          })
+    
+      }
     const start = performance.now()
     try {
       const res = await axios.post("http://localhost:5000/decrypt", {
