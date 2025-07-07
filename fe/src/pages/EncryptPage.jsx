@@ -34,7 +34,7 @@ const EncryptPage = () => {
 
 	const start = performance.now()
 	try {
-		const res = await axios.post("http://localhost:5000/encrypt", { text, key })
+		const res = await axios.post("https://profound-radiance-production-de71.up.railway.app/encrypt", { text, key })
 		const duration = performance.now() - start
 		const durationSec = (duration / 1000).toFixed(2)
 		setTime(durationSec)
@@ -89,7 +89,7 @@ const EncryptPage = () => {
     const start = performance.now()
 	
     try {
-      const res = await axios.post("http://localhost:5000/encrypt-email", {
+      const res = await axios.post("https://profound-radiance-production-de71.up.railway.app/encrypt-email", {
         text,
         key,
         to_email: recipientEmail,
@@ -132,118 +132,136 @@ const EncryptPage = () => {
 
 
   return (
-    <div className="min-h-screen text-white p-8"
-	style={{ 
-    backgroundImage: "url('/bg-gost.png')",
-    backgroundSize: "Cover",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-    }}>
+    <div
+		className="min-h-screen text-white p-4 md:p-8"
+		style={{
+			backgroundImage: "url('/bg-gost.png')",
+			backgroundSize: "cover",
+			backgroundPosition: "center",
+			backgroundRepeat: "no-repeat",
+		}}
+		>
 		{/* Back Button */}
 		<div>
-			<a href="/" className="flex text-xl font-semibold text-white hover:underline">
-					<ArrowIconLeft/>
-					Back
+			<a href="/" className="flex text-xl font-semibold text-white hover:underline items-center">
+			<ArrowIconLeft />
+			Back
 			</a>
 		</div>
 
-		{/* Encryption */}
-		<div className="bg-black p-20 mx-80 rounded-3xl bg-opacity-20 backdrop-blur-sm">
+		{/* Encryption Card */}
+		<div className="bg-black bg-opacity-20 backdrop-blur-sm p-6 md:p-10 rounded-3xl max-w-screen-md mx-auto mt-8">
 			<div className="flex flex-col items-center justify-between mb-6 text-center">
-				<h1 className="text-2xl font-bold text-center"
-				style={{ textShadow: '0px 0px 20px #00BCF1' }}>
-					Encryption</h1>
-			
+			<h1
+				className="text-2xl font-bold"
+				style={{ textShadow: "0px 0px 20px #00BCF1" }}
+			>
+				Encryption
+			</h1>
 			</div>
 
-			<div className="max-w-xl mx-auto space-y-4">
+			<div className="space-y-4">
+			{/* Plaintext */}
+			<div>
+				<p className="font-bold pb-1">Input Plaintext</p>
+				<input
+				type="text"
+				placeholder="Plaintext"
+				value={text}
+				onChange={(e) => setText(e.target.value)}
+				className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray text-white"
+				required
+				/>
+			</div>
+
+			{/* Key */}
+			<div>
+				<p className="font-bold pb-1">Input Key</p>
+				<input
+				type="text"
+				placeholder="Key (32 character)"
+				value={key}
+				onChange={(e) => setKey(e.target.value)}
+				className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray text-white"
+				required
+				/>
+			</div>
+
+			{/* Recipient Email */}
+			<div>
+				<p className="font-bold pb-1">Input Recipient Email</p>
+				<input
+				type="email"
+				placeholder="Recipient Email"
+				value={recipientEmail}
+				onChange={(e) => setRecipientEmail(e.target.value)}
+				className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray text-white"
+				/>
+			</div>
+
+			{/* Sender Email */}
+			<div>
+				<p className="font-bold pb-1">Input Email</p>
+				<input
+				type="email"
+				placeholder="Sender's Email"
+				value={senderEmail}
+				onChange={(e) => setSenderEmail(e.target.value)}
+				className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray text-white"
+				/>
+			</div>
+
+			{/* App Password */}
+			<div className="relative">
+				<p className="font-bold pb-1">Input Email App Password</p>
+				<input
+				type={showPassword ? "text" : "password"}
+				placeholder="App Password Gmail"
+				value={appPassword}
+				onChange={(e) => setAppPassword(e.target.value)}
+				className="w-full p-3 pr-12 bg-[#181B26] border border-white rounded placeholder:text-gray text-white"
+				/>
+				<button
+				type="button"
+				onClick={() => setShowPassword((prev) => !prev)}
+				className="absolute right-4 top-[42px] text-gray-400 hover:text-white"
+				>
+				{showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+				</button>
+			</div>
+
+			{/* Result */}
+			{result && (
 				<div>
-					<p className="font-bold pb-1">Input Plaintext</p>
-					<input
-						type="text"
-						placeholder="Plaintext"
-						value={text}
-						onChange={(e) => setText(e.target.value)}
-						className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray text-white"
-						required
-					/>
+				<p className="font-bold pb-1">Output</p>
+				<div className="bg-gray-800 p-3 rounded border border-white">
+					<strong>Ciphertext:</strong>
+					<p className="mt-1 break-words text-gray-400">{result}</p>
+					<strong>Time:</strong>
+					<p className="mt-1 break-words text-green-400">{time}s</p>
 				</div>
-
-				<div>
-					<p className="font-bold pb-1">Input Key</p>
-					<input
-						type="text"
-						placeholder="Key (32 character)"
-						value={key}
-						onChange={(e) => setKey(e.target.value)}
-						className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray  text-white"
-						required
-					/>
 				</div>
+			)}
 
-				<div>
-					<p className="font-bold pb-1">Input Recipient Email</p>
-					<input
-						type="email"
-						placeholder="Recipient Email"
-						value={recipientEmail}
-						onChange={(e) => setRecipientEmail(e.target.value)}
-						className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray text-white"
-					/>
-				</div>
-
-				<div>
-					<p className="font-bold pb-1">Input Email</p>
-					<input
-						type="email"
-						placeholder="Sender's Email"
-						value={senderEmail}
-						onChange={(e) => setSenderEmail(e.target.value)}
-						className="w-full p-3 bg-[#181B26] border border-white rounded placeholder:text-gray text-white"
-					/>
-				</div>
-
-				<div className="relative">
-					<p className="font-bold pb-1">Input Email App Password</p>
-					<input
-						type={showPassword ? "text" : "password"}
-						placeholder="App Password Gmail"
-						value={appPassword}
-						onChange={(e) => setAppPassword(e.target.value)}
-						className="w-full p-3 pr-12 bg-[#181B26] border border-white rounded placeholder:text-gray text-white"
-					/>
-					<button
-						type="button"
-						onClick={() => setShowPassword((prev) => !prev)}
-						className="absolute right-4 top-[42px] text-gray-400 hover:text-white"
-					>
-						{showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-					</button>
-					</div>
-
-				{result && (
-					<div>
-						<p className="font-bold pb-1">Output</p>
-						<div className="bg-gray-800 p-3 rounded border border-white">
-							<strong>Ciphertext:</strong>
-							<p className="mt-1 break-words text-gray-400">{result}</p>
-							<strong>Time:</strong>
-							<p className="mt-1 break-words text-green-400">{time}s</p>
-						</div>
-					</div>
-				)}
-
-				<div className="flex gap-4 mb-4 items-center w-full">
-					<button onClick={handleEncryptOnly} className="bg-gradient-to-r from-[#0F1014] to-[#181B26] text-white shadow-[#00BCF1] shadow-md px-4 py-2 rounded-xl hover:text-[#00BCF1] hover:shadow-lg transition duration-300 w-full">
-						Encrypt
-					</button>
-					<button onClick={handleEncryptAndSendEmail} className="bg-gradient-to-r from-[#0F1014] to-[#181B26] text-white shadow-[#00BCF1] shadow-md px-4 py-2 rounded-xl hover:text-[#00BCF1] hover:shadow-lg transition duration-300 w-full">
-						Encrypt & Send Email
-					</button>
-				</div>
+			{/* Buttons */}
+			<div className="flex flex-col md:flex-row gap-4 mt-4">
+				<button
+				onClick={handleEncryptOnly}
+				className="bg-gradient-to-r from-[#0F1014] to-[#181B26] text-white shadow-[#00BCF1] shadow-md px-4 py-2 rounded-xl hover:text-[#00BCF1] hover:shadow-lg transition duration-300 w-full"
+				>
+				Encrypt
+				</button>
+				<button
+				onClick={handleEncryptAndSendEmail}
+				className="bg-gradient-to-r from-[#0F1014] to-[#181B26] text-white shadow-[#00BCF1] shadow-md px-4 py-2 rounded-xl hover:text-[#00BCF1] hover:shadow-lg transition duration-300 w-full"
+				>
+				Encrypt & Send Email
+				</button>
+			</div>
 			</div>
 		</div>
-    </div>
+	</div>
+
   )
 }
 

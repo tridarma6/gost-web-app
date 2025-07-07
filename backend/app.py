@@ -14,7 +14,7 @@ def encrypt():
         key = data.get("key")
 
         if not text or not key:
-            return jsonify({"error": "Isi text dan key diperlukan"}), 400
+            return jsonify({"error": "chipertext dan and are required"}), 400
 
         result = gost_encrypt(text, key)
         return jsonify({"result": result})
@@ -30,7 +30,7 @@ def decrypt():
         key = data.get("key")
 
         if not text or not key:
-            return jsonify({"error": "Isi chipertext dan key diperlukan"}), 400
+            return jsonify({"error": "chipertext dan and are required"}), 400
 
         result = gost_decrypt(text, key)
         return jsonify({"result": result})
@@ -48,10 +48,10 @@ def encrypt_and_send_email():
     app_pw = data.get("app_password")
 
     result = gost_encrypt(text, key)
-    send_email(sender, app_pw, to_email, "Hasil Enkripsi GOST", result)
+    send_email(sender, app_pw, to_email, "Result Encryption GOST", result)
 
-    return jsonify({"result": result, "message": "Terkirim ke Email"})
+    return jsonify({"result": result, "message": "Email has sent"})
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)

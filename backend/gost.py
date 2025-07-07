@@ -73,7 +73,12 @@ def gost_decrypt(ciphertext_b64, key):
     ciphertext = base64.b64decode(ciphertext_b64)
     blocks = [ciphertext[i:i+8] for i in range(0, len(ciphertext), 8)]
     decrypted = b''.join([gost_decrypt_block(block, subkeys) for block in blocks])
-    return unpad(decrypted).decode('utf-8', errors='ignore')
+
+    try:
+        clean = unpad(decrypted)
+        return clean.decode('utf-8', errors='ignore')
+    except Exception:
+        return decrypted.decode('utf-8', errors='ignore')
 
 
 def send_email(sender_email, app_password, to_email, subject, body):
